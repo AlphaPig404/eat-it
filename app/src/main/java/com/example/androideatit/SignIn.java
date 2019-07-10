@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.androideatit.Common.Common;
 import com.example.androideatit.Model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,7 +53,10 @@ public class SignIn extends AppCompatActivity {
                             User user = dataSnapshot.child(editPhone.getText().toString()).getValue(User.class);
 
                             if(user.getPassword().equals(editPassword.getText().toString())){
-                                Toast.makeText(SignIn.this, "Sign successful!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignIn.this, Home.class);
+                                Common.currentUser = user;
+                                startActivity(intent);
+                                finish();
                             }else{
                                 Toast.makeText(SignIn.this, "Sign failed!", Toast.LENGTH_SHORT).show();
                             }
