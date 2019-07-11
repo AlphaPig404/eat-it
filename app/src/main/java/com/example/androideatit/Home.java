@@ -1,5 +1,6 @@
 package com.example.androideatit;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -104,14 +105,18 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             @Override
             protected void onBindViewHolder(@NonNull MenuViewHolder menuViewHolder, int i, @NonNull final Category category) {
                 menuViewHolder.txtMenuName.setText(category.getName());
-//                menuViewHolder.imageView.setImageURI(Uri.parse(category.getImage()));
+//                Picasso.get().setLoggingEnabled(true);
                 Picasso.get().load(category.getImage()).into(menuViewHolder.imageView);
 
                 final Category clickItem = category;
                 menuViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int i, boolean isLongClick) {
-                        Toast.makeText(Home.this, ""+ clickItem.getName(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Home.this, FoodList.class);
+                        intent.putExtra("menuId", adapter.getRef(i).getKey());
+                        startActivity(intent);
+//                        finish();
+//                        Toast.makeText(Home.this, ""+ clickItem.getName(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
