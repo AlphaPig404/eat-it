@@ -167,12 +167,17 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         if (id == R.id.nav_menu) {
             // Handle the camera action
+
         } else if (id == R.id.nav_cart) {
-
+            Intent intent = new Intent(getBaseContext(), Cart.class);
+            startActivity(intent);
         } else if (id == R.id.nav_orders) {
-
+            Intent intent = new Intent(getBaseContext(), OrderStatus.class);
+            startActivity(intent);
         } else if (id == R.id.nav_logout) {
-
+            Intent intent = new Intent(getBaseContext(), SignIn.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
